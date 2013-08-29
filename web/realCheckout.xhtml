@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <ui:composition template="masterLayout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid>
+                <h:dataTable value="#{test.orderList}" var="c" border="3">
+                    <h:column>
+                        #{c.dishname}
+                    </h:column>
+                
+                    <h:column>
+                        #{c.number}
+                    </h:column> 
+                    <h:column>
+                        <h:commandLink value="Delete dish from order" action="#{test.deleteRow(c)}"/>
+                    </h:column>    
+                </h:dataTable>
+                    Total price of the order: #{test.totalPrice}
+                    <br/>
+                    <h:outputText value="Adress to be delivered to:" rendered="#{test.isLoggedIn}"/> <h:inputText value="#{test.adress}" rendered="#{test.isLoggedIn}"/>
+                    <br/>
+                    <h:outputText value="Postnumber: " rendered="#{test.isLoggedIn}"/> <h:inputText value="#{test.postnr}" rendered="#{test.isLoggedIn}"/>
+                    <h:outputText value="You must be logged in to order, login" rendered="#{not test.isLoggedIn}"/> <h:commandLink value="here" action="login.xhtml" rendered="#{not test.isLoggedIn}"/>
+                    <h:commandButton value="Checkout order" action ="#{test.putInDatabase()}" rendered="#{test.isLoggedIn}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <ui:define name="windowTitle">Order dishes</ui:define>
+    </h:head>
+    <h:body>
+         <ui:composition template="masterLayout.xhtml">
+            <ui:define name="content">
+        <h:form>
+            <h:dataTable value="#{test.dishList}" var="a" border="3">
+                <h:column>
+                    <f:facet name ="header">
+                        <h:outputText value="Dishes"/>
+                    </f:facet>
+                    <h:commandLink value="#{a.dishname}" action="#{test.jumpToIngredients(a.dishname)}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Price"/>
+                    </f:facet>
+                    <h:outputText value="#{a.price}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity of a dish"/>
+                    </f:facet>
+                    <h:inputText value="#{a.number}" rendered="#{a.editable}"/>
+                    <h:outputText value="#{a.number}" rendered="#{not a.editable}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Order?"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox value="#{a.editable}" onclick="submit()"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Put in Shopping Cart?"/>
+                    </f:facet>
+                    <h:commandButton value="Put in" action="#{test.makeOrder(a.dishname, a.number)}"/>
+                </h:column>
+            </h:dataTable>
+            
+            
+        </h:form>
+         </ui:define>
+         </ui:composition>
+    </h:body>
+</html>
+

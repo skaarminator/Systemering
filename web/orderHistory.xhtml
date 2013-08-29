@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        
+        <ui:composition template="masterLayout.xhtml">
+            <ui:define name="content">
+        Order history for user: #{test.user.email}
+        
+        <form>
+            <h:dataTable value="#{test.orderHistory}" var="c" border="3">
+                 <h:column>
+                     <f:facet name ="header">
+                        <h:outputText value="Ordernumber"/>
+                    </f:facet>
+                    <h:outputText value="#{c.ordernr}"/> 
+                 </h:column>
+                 <h:column>
+                     <f:facet name ="header">
+                        <h:outputText value="Dishname"/>
+                    </f:facet>
+                 <h:outputText value="#{c.dishname}"/> 
+                 </h:column>
+                 <h:column>
+                     <f:facet name ="header">
+                        <h:outputText value="Dishes ordered"/>
+                    </f:facet>
+                 <h:outputText value="#{c.dishesordered}"/>     
+                 </h:column>
+             </h:dataTable>
+        </form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
